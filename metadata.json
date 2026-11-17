@@ -1,0 +1,8 @@
+{
+  "name": "Looplet — Handmade Crochet Boutique",
+  "description": "Little Loops, Lovely Creations. A cozy handmade crochet boutique offering handcrafted crochet flowers, amigurumi plushies, bags, keychains, accessories, and custom creations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
