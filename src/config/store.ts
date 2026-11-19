@@ -1,7 +1,7 @@
 export const STORE_CONFIG = {
   brandName: 'Looplet',
   tagline: 'Little Loops, Lovely Creations.',
-  announcementText: '♡ Handmade with Love | Special Little Creations Just for You ♡',
+  announcementText: 'Made slowly, stitched with love ♡',
   logoPath: '/assets/aistudio/Kawaii_Crochet_Looplet_Logo_d3e8bdfa.png',
   brandGuidePath: '/assets/aistudio/Unknown-4_a0013dc8.png',
   // Central WhatsApp configuration — update this single number for all WhatsApp orders & enquiries

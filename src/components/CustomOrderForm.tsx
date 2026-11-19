@@ -29,6 +29,7 @@ export const CustomOrderForm: React.FC<CustomOrderFormProps> = ({ compact = fals
   const [whatsappNumber, setWhatsappNumber] = useState('');
   const [productType, setProductType] = useState(PRODUCT_TYPES[0]);
   const [preferredColor, setPreferredColor] = useState('Blush Pink & Cream');
+  const [preferredSize, setPreferredSize] = useState('Medium / Standard');
   const [description, setDescription] = useState('');
   const [referenceFileName, setReferenceFileName] = useState<string>('');
   const [referencePreview, setReferencePreview] = useState<string>('');
@@ -73,6 +74,7 @@ export const CustomOrderForm: React.FC<CustomOrderFormProps> = ({ compact = fals
       `*WhatsApp Number:* ${whatsappNumber.trim()}`,
       `*Creation Type:* ${productType}`,
       `*Preferred Yarn Colours:* ${preferredColor.trim() || 'Open to studio suggestion'}`,
+      `*Preferred Size:* ${preferredSize.trim() || 'Standard'}`,
       `*Customisation Details:* ${trimmedDesc}`,
       referenceFileName
         ? `*Reference Image:* "${referenceFileName}" (I will attach this photo directly in our WhatsApp chat!)`
@@ -93,6 +95,8 @@ export const CustomOrderForm: React.FC<CustomOrderFormProps> = ({ compact = fals
     const trimmedName = customerName.trim();
     const cleanPhone = whatsappNumber.replace(/\D/g, '');
     const trimmedDesc = description.trim();
+    const sizeNote = preferredSize.trim();
+    const combinedDesc = sizeNote ? `[Size: ${sizeNote}] ${trimmedDesc}` : trimmedDesc;
 
     if (!trimmedName) {
       setErrorMessage('Please enter your name so we know who we are crafting for.');
@@ -117,7 +121,7 @@ export const CustomOrderForm: React.FC<CustomOrderFormProps> = ({ compact = fals
           whatsappNumber: whatsappNumber.trim(),
           productType,
           preferredColor: preferredColor.trim(),
-          description: trimmedDesc,
+          description: combinedDesc,
           referenceFileName,
         }),
       });
@@ -160,20 +164,20 @@ export const CustomOrderForm: React.FC<CustomOrderFormProps> = ({ compact = fals
 
   return (
     <div
-      className={`rounded-3xl border border-[#EED8E0] bg-white/90 shadow-sm ${
-        compact ? 'p-6 sm:p-8' : 'p-6 sm:p-10'
+      className={`rounded-[2rem] border border-dashed border-[#D78FAE] bg-[#FFFDF9] shadow-sm ${
+        compact ? 'p-6 sm:p-7' : 'p-6 sm:p-10'
       }`}
     >
       <div className="mb-6">
-        <span className="inline-flex items-center gap-1.5 font-hand text-xl text-[#9F4E70]">
+        <span className="inline-flex items-center gap-1.5 font-hand text-2xl text-[#9F4E70]">
           <Sparkles className="h-4 w-4" />
           <span>Made Just for You</span>
         </span>
         <h3 className="mt-1 font-display text-2xl font-semibold text-[#4A3531]">
-          Custom Crochet Request Form
+          Custom Crochet Sketch &amp; Order Note
         </h3>
         <p className="mt-1.5 text-sm text-[#7D5E5A]">
-          Fill in your idea below to send a formatted WhatsApp message directly to our studio.
+          Tell us about your dream piece below to prepare a neat WhatsApp brief directly for our studio.
         </p>
       </div>
 
@@ -230,33 +234,50 @@ export const CustomOrderForm: React.FC<CustomOrderFormProps> = ({ compact = fals
           </div>
 
           <div>
-            <label htmlFor="custom-color" className="block text-xs font-semibold text-[#4A3531]">
-              Preferred Colour Palette
+            <label htmlFor="custom-size" className="block text-xs font-semibold text-[#4A3531]">
+              Preferred Size
             </label>
-            <input
-              id="custom-color"
-              type="text"
-              value={preferredColor}
-              onChange={(e) => setPreferredColor(e.target.value)}
-              placeholder="e.g., Blush pink, sage green & cream"
-              className="mt-1.5 w-full rounded-2xl border border-[#EED8E0] bg-[#FFF9F2] px-4 py-2.5 text-sm text-[#4A3531] placeholder:text-[#7D5E5A]/60 focus:border-[#B9688A] focus:outline-none"
-            />
-            <div className="mt-2 flex flex-wrap gap-1.5">
-              {COLOUR_SUGGESTIONS.map((swatch) => (
-                <button
-                  key={swatch.name}
-                  type="button"
-                  onClick={() => setPreferredColor(swatch.name)}
-                  className="inline-flex items-center gap-1 rounded-full border border-[#EED8E0] bg-[#FFF9F2] px-2.5 py-0.5 text-[11px] text-[#7D5E5A] transition-colors hover:border-[#D78FAE] hover:text-[#4A3531]"
-                >
-                  <span
-                    className="h-2.5 w-2.5 rounded-full border border-black/10"
-                    style={{ backgroundColor: swatch.hex }}
-                  />
-                  <span>{swatch.name}</span>
-                </button>
-              ))}
-            </div>
+            <select
+              id="custom-size"
+              value={preferredSize}
+              onChange={(e) => setPreferredSize(e.target.value)}
+              className="mt-1.5 w-full rounded-2xl border border-[#EED8E0] bg-[#FFF9F2] px-4 py-2.5 text-sm text-[#4A3531] focus:border-[#B9688A] focus:outline-none"
+            >
+              <option value="Mini / Pocket-sized (approx. 8–12 cm)">Mini / Pocket-sized (8–12 cm)</option>
+              <option value="Medium / Standard">Medium / Standard</option>
+              <option value="Large / Statement Piece">Large / Statement Piece</option>
+              <option value="Custom dimensions (described below)">Custom dimensions (in notes)</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="custom-color" className="block text-xs font-semibold text-[#4A3531]">
+            Preferred Colour Palette
+          </label>
+          <input
+            id="custom-color"
+            type="text"
+            value={preferredColor}
+            onChange={(e) => setPreferredColor(e.target.value)}
+            placeholder="e.g., Blush pink, sage green & cream"
+            className="mt-1.5 w-full rounded-2xl border border-[#EED8E0] bg-[#FFF9F2] px-4 py-2.5 text-sm text-[#4A3531] placeholder:text-[#7D5E5A]/60 focus:border-[#B9688A] focus:outline-none"
+          />
+          <div className="mt-2 flex flex-wrap gap-1.5">
+            {COLOUR_SUGGESTIONS.map((swatch) => (
+              <button
+                key={swatch.name}
+                type="button"
+                onClick={() => setPreferredColor(swatch.name)}
+                className="inline-flex items-center gap-1 rounded-full border border-[#EED8E0] bg-[#FFF9F2] px-2.5 py-0.5 text-[11px] text-[#7D5E5A] transition-colors hover:border-[#D78FAE] hover:text-[#4A3531]"
+              >
+                <span
+                  className="h-2.5 w-2.5 rounded-full border border-black/10"
+                  style={{ backgroundColor: swatch.hex }}
+                />
+                <span>{swatch.name}</span>
+              </button>
+            ))}
           </div>
         </div>
 

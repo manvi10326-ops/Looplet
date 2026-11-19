@@ -3,55 +3,64 @@ import { Heart, Instagram, Mail, MapPin, MessageCircle, Sparkles } from 'lucide-
 import { buildWhatsAppUrl, STORE_CONFIG } from '../config/store';
 import { useStore } from '../context/StoreContext';
 import { CategorySlug } from '../types/shop';
+import { BowDoodle, SageSprigDoodle, StitchedDivider, YarnBallDoodle } from './ScrapbookDoodles';
 
 const FOOTER_CATEGORIES: { label: string; slug: CategorySlug }[] = [
-  { label: 'Crochet Flowers & Bouquets', slug: 'crochet-flowers-bouquets' },
-  { label: 'Crochet Plushies & Dolls', slug: 'crochet-plushies-dolls' },
-  { label: 'Crochet Bags & Purses', slug: 'crochet-bags-purses' },
-  { label: 'Crochet Keychains', slug: 'crochet-keychains' },
-  { label: 'Crochet Home Decor', slug: 'crochet-home-decor' },
-  { label: 'Baby Crochet Collection', slug: 'baby-crochet-collection' },
+  { label: 'Plushies & Amigurumi', slug: 'crochet-plushies-dolls' },
+  { label: 'Crochet Flowers', slug: 'crochet-flowers-bouquets' },
+  { label: 'Bags & Purses', slug: 'crochet-bags-purses' },
+  { label: 'Keychains', slug: 'crochet-keychains' },
+  { label: 'Accessories', slug: 'crochet-accessories' },
+  { label: 'Home Decor', slug: 'crochet-home-decor' },
+  { label: 'Gifts & Hampers', slug: 'crochet-gifts-hampers' },
+  { label: 'Custom Creations', slug: 'custom-crochet-creations' },
 ];
 
 export const Footer: React.FC = () => {
   const { navigate, navigateToCategory } = useStore();
 
   return (
-    <footer
-      id="site-footer"
-      className="border-t border-[#EED8E0] bg-gradient-to-b from-[#FFF9F2] to-[#F4DDE5]/65 text-[#4A3531]"
-    >
-      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-          {/* Brand Summary */}
-          <div className="space-y-4">
-            <button
-              type="button"
-              onClick={() => navigate({ view: 'home' })}
-              className="inline-block rounded-xl focus-visible:ring-2 focus-visible:ring-[#B9688A]"
-            >
-              <img
-                src={STORE_CONFIG.logoPath}
-                alt="Looplet Logo"
-                className="h-14 w-auto object-contain"
-              />
-            </button>
-            <p className="font-hand text-xl text-[#9F4E70]">
-              {STORE_CONFIG.tagline}
+    <footer id="site-footer" className="relative overflow-hidden bg-[#FFF9F2] text-[#4A3531]">
+      {/* Delicate Stitched Top Edge */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <StitchedDivider />
+      </div>
+
+      <div className="mx-auto max-w-7xl px-4 pb-12 pt-12 sm:px-6 lg:px-8 lg:pb-14 lg:pt-16">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+          {/* Brand Scrapbook Corner */}
+          <div className="space-y-4 lg:col-span-4">
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => navigate({ view: 'home' })}
+                className="inline-block rounded-xl focus-visible:ring-2 focus-visible:ring-[#B9688A]"
+              >
+                <img
+                  src={STORE_CONFIG.logoPath}
+                  alt="Looplet Logo"
+                  className="h-12 w-auto object-contain"
+                />
+              </button>
+              <YarnBallDoodle className="h-9 w-9 opacity-85" />
+            </div>
+
+            <p className="font-hand text-2xl text-[#9F4E70]">{STORE_CONFIG.tagline}</p>
+
+            <p className="max-w-xs text-sm leading-relaxed text-[#7D5E5A]">
+              A cozy handmade crochet studio crafting little yarn treasures, everlasting blooms,
+              soft amigurumi friends, and heartfelt gifts—one slow stitch at a time.
             </p>
-            <p className="text-sm leading-relaxed text-[#7D5E5A]">
-              A cozy handmade crochet boutique crafting heirloom bouquets, amigurumi friends,
-              everyday totes, and thoughtful gifts one stitch at a time.
-            </p>
-            <div className="flex items-center gap-3 pt-1">
+
+            <div className="flex flex-wrap items-center gap-2.5 pt-1">
               <a
                 href={STORE_CONFIG.social.instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Follow Looplet on Instagram"
-                className="flex h-10 items-center gap-2 rounded-full border border-[#E5BECB] bg-[#FFF9F2] px-4 text-xs font-medium text-[#4A3531] transition-colors hover:bg-[#F4DDE5]"
+                className="inline-flex h-10 items-center gap-2 rounded-full border border-[#E5BECB] bg-[#F4DDE5]/40 px-4 text-xs font-semibold text-[#4A3531] transition-colors hover:bg-[#F4DDE5]"
               >
-                <Instagram className="h-4 w-4 text-[#9F4E70]" />
+                <Instagram className="h-3.5 w-3.5 text-[#9F4E70]" />
                 <span>Instagram</span>
               </a>
               <a
@@ -59,16 +68,16 @@ export const Footer: React.FC = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Follow Looplet on Pinterest"
-                className="flex h-10 items-center gap-2 rounded-full border border-[#E5BECB] bg-[#FFF9F2] px-4 text-xs font-medium text-[#4A3531] transition-colors hover:bg-[#F4DDE5]"
+                className="inline-flex h-10 items-center gap-2 rounded-full border border-[#E8D595] bg-[#F8E9B5]/45 px-4 text-xs font-semibold text-[#4A3531] transition-colors hover:bg-[#F8E9B5]"
               >
-                <Sparkles className="h-4 w-4 text-[#9F4E70]" />
+                <Sparkles className="h-3.5 w-3.5 text-[#9F4E70]" />
                 <span>Pinterest</span>
               </a>
             </div>
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="lg:col-span-2">
             <h3 className="font-display text-base font-semibold text-[#4A3531]">Quick Links</h3>
             <ul className="mt-4 space-y-2.5 text-sm text-[#7D5E5A]">
               <li>
@@ -86,7 +95,7 @@ export const Footer: React.FC = () => {
                   onClick={() => navigate({ view: 'shop', category: 'all' })}
                   className="transition-colors hover:text-[#9F4E70]"
                 >
-                  Shop All Creations
+                  Shop Collection
                 </button>
               </li>
               <li>
@@ -113,7 +122,7 @@ export const Footer: React.FC = () => {
                   onClick={() => navigate({ view: 'custom-orders' })}
                   className="transition-colors hover:text-[#9F4E70]"
                 >
-                  Custom Crochet Orders
+                  Custom Orders
                 </button>
               </li>
               <li>
@@ -138,9 +147,9 @@ export const Footer: React.FC = () => {
           </div>
 
           {/* Shop Categories */}
-          <div>
+          <div className="lg:col-span-3">
             <h3 className="font-display text-base font-semibold text-[#4A3531]">Shop Categories</h3>
-            <ul className="mt-4 space-y-2.5 text-sm text-[#7D5E5A]">
+            <ul className="mt-4 grid grid-cols-1 gap-2.5 text-sm text-[#7D5E5A] sm:grid-cols-2 lg:grid-cols-1">
               {FOOTER_CATEGORIES.map((cat) => (
                 <li key={cat.slug}>
                   <button
@@ -155,11 +164,11 @@ export const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Contact & Care Policies */}
-          <div className="space-y-6">
+          {/* Contact & Policies */}
+          <div className="space-y-6 lg:col-span-3">
             <div>
-              <h3 className="font-display text-base font-semibold text-[#4A3531]">Get in Touch</h3>
-              <ul className="mt-4 space-y-3 text-sm text-[#7D5E5A]">
+              <h3 className="font-display text-base font-semibold text-[#4A3531]">Studio Contact</h3>
+              <ul className="mt-4 space-y-2.5 text-sm text-[#7D5E5A]">
                 <li className="flex items-start gap-2.5">
                   <Mail className="mt-0.5 h-4 w-4 shrink-0 text-[#9F4E70]" />
                   <a
@@ -189,7 +198,7 @@ export const Footer: React.FC = () => {
 
             <div>
               <h4 className="text-xs font-semibold uppercase tracking-wider text-[#7D5E5A]">
-                Boutique Policies
+                Policies
               </h4>
               <ul className="mt-2.5 space-y-2 text-sm text-[#7D5E5A]">
                 <li>
@@ -224,13 +233,20 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-[#E5BECB]/70 pt-6 text-center text-xs text-[#7D5E5A] sm:flex-row sm:text-left">
-          <p>© {new Date().getFullYear()} Looplet — Handmade Crochet Boutique. All rights reserved.</p>
-          <p className="inline-flex items-center gap-1.5">
-            <span>Stitched with care</span>
-            <Heart className="h-3.5 w-3.5 fill-[#D78FAE] text-[#D78FAE]" />
-            <span>Little Loops, Lovely Creations</span>
-          </p>
+        {/* Bottom Scrapbook Sign-off */}
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-dashed border-[#E5BECB] pt-6 text-center text-xs text-[#7D5E5A] sm:flex-row sm:text-left">
+          <div className="flex items-center gap-2">
+            <SageSprigDoodle className="hidden h-6 w-10 sm:block" />
+            <p>© {new Date().getFullYear()} Looplet — Handmade Crochet Boutique.</p>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <BowDoodle className="h-5 w-7" />
+            <p className="inline-flex items-center gap-1.5 font-medium">
+              <span>Made slowly, stitched with love</span>
+              <Heart className="h-3.5 w-3.5 fill-[#D78FAE] text-[#D78FAE]" />
+            </p>
+          </div>
         </div>
       </div>
     </footer>
